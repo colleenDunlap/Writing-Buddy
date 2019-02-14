@@ -11,6 +11,6 @@ numPages = pdfReader.numPages
 #page Object
 for iPage in range(0,numPages):
 	pageObj = pdfReader.getPage(iPage)
-	print(pageObj.extractText())
+	#print(pageObj.extractText())
 #extract Text from Page
 pdfFileObj.close()
