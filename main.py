@@ -22,6 +22,7 @@ for iWord in range(0, len(words)):
 	words[iWord] = words[iWord].replace(",","")
 	words[iWord] = words[iWord].replace(".","")
 	words[iWord] = words[iWord].replace("-","")
+	words[iWord] = words[iWord].lower()
 	print(words[iWord])
 pdfFileObj.close()
 
