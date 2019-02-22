@@ -18,6 +18,10 @@ for iPage in range(0,numPages):
 	words = list(filter(lambda x: x!= '\n', words))
 	words = list(filter(lambda x: x!= '', words))
 	print(words)
-
+for iWord in range(0, len(words)):
+	words[iWord] = words[iWord].replace(",","")
+	words[iWord] = words[iWord].replace(".","")
+	words[iWord] = words[iWord].replace("-","")
+	print(words[iWord])
 pdfFileObj.close()
 
