@@ -13,6 +13,11 @@ numPages = pdfReader.numPages
 for iPage in range(0,numPages):
 	pageObj = pdfReader.getPage(iPage)
 	text = pageObj.extractText()
-	print(text.split(' '))
+	#text.remove('\n')
+	words = text.split(' ')
+	words = list(filter(lambda x: x!= '\n', words))
+	words = list(filter(lambda x: x!= '', words))
+	print(words)
+
 pdfFileObj.close()
 
