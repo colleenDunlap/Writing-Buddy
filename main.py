@@ -2,6 +2,42 @@ import PyPDF2
 import unicodedata
 import binascii
 #pdf import code from https://www.geeksforgeeks.org/working-with-pdf-files-in-python/
+def calcHash(word):
+	wordSum = 0;
+	for iLetter in range(0, len(word)):
+		wordSum = wordSum + (ord(word[iLetter]))#return ascii
+	return (wordSum%89)
+class ListNode:
+    """
+    A node in a singly-linked list.
+    """
+    def __init__(self, frequency=None, next=None, word=None):
+        self.frequency = frequency
+        self.next = next
+        self.word = word
+    def __repr__(self):
+        return repr(self.frequency)
+class SinglyLinkedList:
+	def __init__(self):
+		self.head = None
+	def append(self, word):
+		if not self.head:
+			self.head = ListNode(word=word, frequency = 1)
+			return
+		curr = self.head
+		while curr.next:
+			if curr.word == word:
+				curr.frequency = curr.frequency + 1;
+				return
+			curr = curr.next	
+		curr.next = ListNode(word=word, frequency = 1)
+	def __repr__(self):
+		nodes = []
+		curr = self.head
+		while curr:
+			nodes.append(repr(curr))
+			curr = curr.next
+		return '[' + ', '.join(nodes) + ']'
 
 #file Object
 pdfFileObj = open('samplePDFMultiPage.pdf', 'rb')
@@ -9,6 +45,9 @@ pdfFileObj = open('samplePDFMultiPage.pdf', 'rb')
 pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 numPages = pdfReader.numPages
 words = []
+chainList = []
+for iList in range(0, 89):#because we mod by 89, only 89 possible hashes
+	chainList.append(SinglyLinkedList())
 #page Object
 for iPage in range(0,numPages):
 	pageObj = pdfReader.getPage(iPage)
@@ -30,4 +69,9 @@ for iWord in range(0, len(words)):
 	words[iWord] = words[iWord].lower()
 print(words)
 pdfFileObj.close()
+for iWord in range(0, len(words)):
+	hash = calcHash(words[iWord])
+	print(hash);
+	chainList[hash].append(words[iWord])
+print(chainList[18])
 
