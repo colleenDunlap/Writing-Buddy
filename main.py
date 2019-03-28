@@ -70,6 +70,7 @@ for iPage in range(0,numPages):
 	words.extend(words2)
 for iWord in range(0, len(words)):
 	words[iWord] = words[iWord].replace(",","")
+	words[iWord] = words[iWord].replace("%","")
 	words[iWord] = words[iWord].replace(":","")
 	words[iWord] = words[iWord].replace("/","")
 	words[iWord] = words[iWord].replace("(","")
