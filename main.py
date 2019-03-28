@@ -2,6 +2,8 @@ import PyPDF2
 import unicodedata
 import binascii
 #pdf import code from https://www.geeksforgeeks.org/working-with-pdf-files-in-python/
+#array of object code inspiration https://www.daniweb.com/programming/software-development/code/216631/a-list-of-class-objects-python
+#linked list object code inspiration https://dbader.org/blog/python-linked-list
 def calcHash(word):
 	wordSum = 0;
 	for iLetter in range(0, len(word)):
@@ -23,14 +25,15 @@ class SinglyLinkedList:
 	def append(self, word):
 		if not self.head:
 			self.head = ListNode(word=word, frequency = 1)
-			return
+			return self.head
 		curr = self.head
 		while curr.next:
 			if curr.word == word:
 				curr.frequency = curr.frequency + 1;
-				return
+				return curr;
 			curr = curr.next	
 		curr.next = ListNode(word=word, frequency = 1)
+		return curr.next;
 	def __repr__(self):
 		nodes = []
 		curr = self.head
@@ -67,11 +70,12 @@ for iWord in range(0, len(words)):
 	words[iWord] = words[iWord].replace("-","")
 	words[iWord] = words[iWord].replace("\n","")
 	words[iWord] = words[iWord].lower()
-print(words)
+
 pdfFileObj.close()
 for iWord in range(0, len(words)):
 	hash = calcHash(words[iWord])
 	print(hash);
-	chainList[hash].append(words[iWord])
+	test = chainList[hash].append(words[iWord])
+	print(test.word);
 print(chainList[18])
 
