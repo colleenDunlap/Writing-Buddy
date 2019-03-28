@@ -70,6 +70,7 @@ for iPage in range(0,numPages):
 	words.extend(words2)
 for iWord in range(0, len(words)):
 	words[iWord] = words[iWord].replace(",","")
+	words[iWord] = words[iWord].replace(":","")
 	words[iWord] = words[iWord].replace("/","")
 	words[iWord] = words[iWord].replace("(","")
 	words[iWord] = words[iWord].replace(")","")
@@ -79,7 +80,7 @@ for iWord in range(0, len(words)):
 	words[iWord] = words[iWord].lower()
 
 pdfFileObj.close()
-
+print(words);
 #loop to store each word in the hash table
 for iWord in range(0, len(words)):
 	hash = calcHash(words[iWord])
