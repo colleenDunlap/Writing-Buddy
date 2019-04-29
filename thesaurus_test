@@ -1,0 +1,3 @@
+from thesaurus import Word
+w = Word('box')
+print(w.synonyms())
