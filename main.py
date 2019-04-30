@@ -110,7 +110,7 @@ class DoublyLinkedList:
 		return '[' + ', '.join(nodes) + ']'
 #file Object
 start = time.time()
-pdfFileObj = open('samplePDFMultiPage.pdf', 'rb')
+pdfFileObj = open('vocabulary.pdf', 'rb')
 #reader Object
 pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 numPages = pdfReader.numPages
