@@ -1,5 +1,6 @@
 import PyPDF2
 import unicodedata
+import time
 import binascii
 from thesaurus import Word
 from PyDictionary import PyDictionary
@@ -108,6 +109,7 @@ class DoublyLinkedList:
 			curr = curr.next
 		return '[' + ', '.join(nodes) + ']'
 #file Object
+start = time.time()
 pdfFileObj = open('samplePDFMultiPage.pdf', 'rb')
 #reader Object
 pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
@@ -161,6 +163,9 @@ for iWord in range(0, len(words)):
 		cacheMin = cacheList.tail.prev.frequency;
 print(chainList[18]) #test to print an index with known collisions
 print(cacheList)
+end = time.time()
+print("For n of " + str(len(words)))
+print("Execution Time Was " + str((end-start)))
 cacheList.printSynonyms()
 #print('Synonyms:')
 #input_word = Word('community') #chose "community" as a test word
