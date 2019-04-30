@@ -76,7 +76,7 @@ class DoublyLinkedList:
 		curr = self.head;
 		while curr:
 			if(curr.word==word):
-				print("EQUIVALENT WORDS")
+				
 				return;
 			curr = curr.next;
 		curr = self.head;
@@ -84,13 +84,14 @@ class DoublyLinkedList:
 
 			if(curr.frequency<frequency):
 				n = DoubleListNode(word = word, frequency=frequency)
-				print(n.word);
+				
 				if(curr == self.head):
 					self.head = n;
 				n.next = curr.next;
 				curr.next.prev = n;
 				n.prev = curr.prev;
 				curr.prev.next = n;
+				return;
 			curr = curr.next;
 	def __repr__(self):
 		nodes = []
@@ -126,7 +127,7 @@ for iPage in range(0,numPages):
 	words2 = text.split(' ')
 	words2 = list(filter(lambda x: x!= '\n', words2))
 	words2 = list(filter(lambda x: x!= '', words2))
-	words2 = list(filter(lambda x: len(x)>5, words2))
+	words2 = list(filter(lambda x: len(x)>4, words2))
 	words.extend(words2)
 for iWord in range(0, len(words)):
 	words[iWord] = words[iWord].replace(",","")
@@ -150,7 +151,7 @@ for iWord in range(0, len(words)):
 	node = chainList[hash].append(words[iWord])
 	if (node.frequency>cacheMin):
 		cacheList.insert(node.word, node.frequency)
-		cacheMin = cacheList.tail.frequency;
+		cacheMin = cacheList.tail.prev.frequency;
 print(chainList[18]) #test to print an index with known collisions
 print(cacheList)
 print('Synonyms:')
