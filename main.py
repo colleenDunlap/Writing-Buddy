@@ -93,6 +93,13 @@ class DoublyLinkedList:
 				curr.prev.next = n;
 				return;
 			curr = curr.next;
+	def printSynonyms(self):
+		curr = self.head;
+		while curr.next:
+			print("Common Word: " + curr.word);
+			input_word = Word(curr.word) 
+			print(input_word.synonyms())
+			curr = curr.next
 	def __repr__(self):
 		nodes = []
 		curr = self.head
@@ -154,11 +161,12 @@ for iWord in range(0, len(words)):
 		cacheMin = cacheList.tail.prev.frequency;
 print(chainList[18]) #test to print an index with known collisions
 print(cacheList)
-print('Synonyms:')
-input_word = Word('community') #chose "community" as a test word
-print(input_word.synonyms())
-dictionary=PyDictionary()
-print('Definition:')
-print (dictionary.meaning('community'))
+cacheList.printSynonyms()
+#print('Synonyms:')
+#input_word = Word('community') #chose "community" as a test word
+#print(input_word.synonyms())
+#dictionary=PyDictionary()
+#print('Definition:')
+#print (dictionary.meaning('community'))
 
 
