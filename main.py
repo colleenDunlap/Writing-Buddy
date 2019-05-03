@@ -100,6 +100,16 @@ class DoublyLinkedList:
 			print("Common Word: " + curr.word);
 			input_word = Word(curr.word) 
 			print(input_word.synonyms())
+			print(" ")
+			curr = curr.next
+	def printDefinitions(self):
+		dictionary= PyDictionary
+		curr = self.head;
+		while curr.next:
+			print("Common Word: " + curr.word);
+			definition = dictionary.meaning(curr.word)
+			print(definition)
+			print("")
 			curr = curr.next
 	def __repr__(self):
 		nodes = []
@@ -108,9 +118,12 @@ class DoublyLinkedList:
 			nodes.append(repr(curr))
 			curr = curr.next
 		return '[' + ', '.join(nodes) + ']'
+
+
 #file Object
 start = time.time()
-pdfFileObj = open('vocabulary.pdf', 'rb')
+pdfFileObj = open('language.pdf', 'rb')
+
 #reader Object
 pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 numPages = pdfReader.numPages
@@ -124,7 +137,7 @@ cacheList = []
 cacheList = DoublyLinkedList();
 for iList in range(0,20):#frequent words cache
 	cacheList.append("")
-print(cacheList);
+
 for iList in range(0, 89):#because we mod by 89, only 89 possible hashes
 	chainList.append(SinglyLinkedList())
 
@@ -152,26 +165,34 @@ for iWord in range(0, len(words)):
 	words[iWord] = words[iWord].lower()
 
 pdfFileObj.close()
-#print(words);
 #loop to store each word in the hash table
-print(cacheList);
 for iWord in range(0, len(words)):
 	hash = calcHash(words[iWord])
 	node = chainList[hash].append(words[iWord])
 	if (node.frequency>cacheMin):
 		cacheList.insert(node.word, node.frequency)
 		cacheMin = cacheList.tail.prev.frequency;
-print(chainList[18]) #test to print an index with known collisions
-print(cacheList)
-end = time.time()
+
 print("For n of " + str(len(words)))
+end = time.time()
 print("Execution Time Was " + str((end-start)))
-cacheList.printSynonyms()
-#print('Synonyms:')
-#input_word = Word('community') #chose "community" as a test word
-#print(input_word.synonyms())
-#dictionary=PyDictionary()
-#print('Definition:')
-#print (dictionary.meaning('community'))
+print("") #return to new line for clarity
 
+print("would you like to a)revise or b)learn?")
+response = input(); #read in user response
 
+print("Most common words: ")
+print(cacheList)
+print("") #return to new line for clarity
+
+if response == 'a':
+	print("Synonyms: ")
+	cacheList.printSynonyms()
+
+else:
+	cacheList.printDefinitions()
+
+#spacing added at the bottom for clarity
+print("")
+print("")
+print("")
