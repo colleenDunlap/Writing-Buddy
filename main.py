@@ -16,6 +16,14 @@ def calcHash(word):
 		wordSum = wordSum + (ord(word[iLetter]))#return ascii
 	return (wordSum%89)
 
+#Function to handle when a synonym cannot be found
+def synonymErrorHandle(curr):
+	#assert ('linux' in sys.platform), "Function can only run on Linux systems."
+	print("Common Word: " + curr.word);
+	input_word = Word(curr.word)
+	print(input_word.synonyms())
+
+
 #a node in a singly-linked list
 class ListNode:
     def __init__(self, frequency=None, next=None, word=None):
@@ -97,9 +105,10 @@ class DoublyLinkedList:
 	def printSynonyms(self):
 		curr = self.head;
 		while curr.next:
-			print("Common Word: " + curr.word);
-			input_word = Word(curr.word) 
-			print(input_word.synonyms())
+			try:
+    				synonymErrorHandle(curr)
+			except:
+    				print("no synonym found")
 			print(" ")
 			curr = curr.next
 	def printDefinitions(self):
